@@ -438,69 +438,6 @@ def create_singlet_triplet_basis_change_matrix(VS, double_part, idx, hole34_part
 
     return sps.coo_matrix((data,(row,col)),shape=(VS.dim,VS.dim))/np.sqrt(2.0), S_val, Sz_val, AorB_sym
 
-
-def create_bonding_anti_bonding_basis_change_matrix(VS):
-    
-    dim = VS.dim
-    data = []
-    row = []
-    col = []   
-    
-    bonding_val = np.zeros(VS.dim, dtype=int)    
-    
-    # store index of partner state to avoid double counting
-    # otherwise, when arriving at i's partner j, its partner would be i
-    count_list = []    
-    
-    for i in range(0,VS.dim):
-        start_state = VS.get_state(VS.lookup_tbl[i])
-        s1 = start_state['hole1_spin']
-        s2 = start_state['hole2_spin']
-        s3 = start_state['hole3_spin']
-        s4 = start_state['hole4_spin']            
-        orb1 = start_state['hole1_orb']
-        orb2 = start_state['hole2_orb']
-        orb3 = start_state['hole3_orb']
-        orb4 = start_state['hole4_orb']       
-        x1, y1, z1 = start_state['hole1_coord']
-        x2, y2, z2 = start_state['hole2_coord']          
-        x3, y3, z3 = start_state['hole3_coord']
-        x4, y4, z4 = start_state['hole4_coord']          
-        
-        slabel = [s1,orb1,x1,y1,z1,s2,orb2,x2,y2,z2,s3,orb3,x3,y3,z3,s4,orb4,x4,y4,z4]
-
-        
-        #Two layers of Cu and Ni exchange position and when z=1 in apz orb,it's still itself
-        
-        slabel2 = [s1,orb1,x1,y1,2-z1,s2,orb2,x2,y2,2-z2,s3,orb3,x3,y3,2-z3,s4,orb4,x4,y4,2-z4]
-        tmp_state = vs.create_state(slabel2)
-        partner_state,phase,_ = vs.make_state_canonical(tmp_state)      
-#         print (phase)
-        j = VS.get_index(partner_state)        
-        
-        if j==i:
-            data.append(np.sqrt(2.0)); row.append(i); col.append(i)
-         
-        else:
-            if i not in count_list:
-                # append matrix elements for bonding
-                # convention: original state col i stores bonding and 
-                #             partner state col j stores anti-bonding
-                data.append(1.0);  row.append(i); col.append(i)
-                data.append(phase);  row.append(j); col.append(i)
-                bonding_val[i] = 1          
-
-
-                # append matrix elements for anti-bonding
-                data.append(1.0);  row.append(i); col.append(j)
-                data.append(-phase);   row.append(j); col.append(j)
-                bonding_val[j] = -1
-
-
-                count_list.append(j)
-
-    return sps.coo_matrix((data,(row,col)),shape=(VS.dim,VS.dim))/np.sqrt(2.0), bonding_val       
-
 # def print_VS_after_basis_change(VS,S_val,Sz_val):
 #     print ('print_VS_after_basis_change:')
 #     for i in range(0,VS.dim):

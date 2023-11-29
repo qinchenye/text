@@ -24,7 +24,14 @@ def create_state(slabel):
     s3 = slabel[10]; orb3 = slabel[11]; x3 = slabel[12]; y3 = slabel[13]; z3 = slabel[14];
     s4 = slabel[15]; orb4 = slabel[16]; x4 = slabel[17]; y4 = slabel[18]; z4 = slabel[19];    
     
+#     assert not (((x3,y3,z3))==(x1,y1,z1) and s3==s1 and orb3==orb1)
+#     assert not (((x1,y1,z1))==(x2,y2,z2) and s1==s2 and orb1==orb2)
+#     assert not (((x3,y3,z3))==(x2,y2,z2) and s3==s2 and orb3==orb2)
+#     assert not (((x4,y4,z4))==(x1,y1,z1) and s4==s1 and orb4==orb1)
+#     assert not (((x4,y4,z4))==(x2,y2,z2) and s4==s2 and orb4==orb2)
+#     assert not (((x4,y4,z4))==(x3,y3,z3) and s4==s3 and orb4==orb3)    
 
+#     assert(check_in_vs_condition1(x1,y1,x2,y2,x3,y3,x4,y4))
 
     state = {'hole1_spin' : s1,\
              'hole1_orb'  : orb1,\

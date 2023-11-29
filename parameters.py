@@ -28,7 +28,6 @@ edCu = {'d3z2r2': 0.095,\
 edNi = edCu
 
 epNis = np.arange(1.86, 1.861, 1.0)
-epbilayers = epNis
 
 # 29.5GPa:
 epNis = np.arange(3.23, 3.231, 1.0)
@@ -58,20 +57,20 @@ C = 0.58
 Norb = 5
 if Norb==8 or Norb==5:
     #tpds = [0.00001]  # for check_CuO4_eigenvalues.py
-    tpds = np.linspace(1.3, 1.3, num=1, endpoint=True) #[0.25]
+#     tpds = np.linspace(1.3, 1.3, num=1, endpoint=True) #[0.25]
 #     tpds = [0.01]
 
     # 29.5GPa:
     tpds = np.linspace(0.6, 0.6, num=1, endpoint=True) #[0.25]
 
-    tpps = [0.55]
+#     tpps = [0.55]
 
     # 29.5GPa:
-#     tpps = [0.35]
+    tpps = [0.35]
     
-    tapzds = np.linspace(0, 0, num=1, endpoint=True)
+    tapzds = np.linspace(0, 4.2, num=14, endpoint=True)
 
-    tz_a1a1 = 0.028
+#     tz_a1a1 = 0.028
 
     # 29.5GPa:
     tz_a1a1 = 0.044
