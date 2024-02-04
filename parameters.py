@@ -119,7 +119,7 @@ if_H0_rotate_byU = 1
 basis_change_type = 'd_double' # 'all_states' or 'd_double'
 if_print_VS_after_basis_change = 0
 
-if_all_A_d8 = 1  # if if_all_A_d8=0，then half A d8 and half A d10
+all_A_d8910 = 'd8'  #  'd8' or  'd9' or  'd10' 'd8' means all A give d8,'d10' means 2/A give d8 and  2/A give d10 ,'d9'  means newly 2/3A give d9 and 2A gives d10 
 
 if_compute_Aw = 0
 if if_compute_Aw==1:
@@ -168,6 +168,7 @@ orbs = Ni_Cu_orbs + O_orbs + Obilayer_orbs
 #assert(len(orbs)==Norb)
 
 Upps = [0]
+Usss = [0]
 symmetries = ['1A1','3B1','3B1','1A2','3A2','1E','3E']
 print ("compute A(w) for symmetries = ",symmetries)
 

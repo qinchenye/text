@@ -493,6 +493,7 @@ class VariationalSpace:
                                                               sss!=['dn','dn','dn','up','up']:
                                                                 continue
 
+
                                                         # neglect d7 state !!
                                                         if not exist_d6_d7_state\
                                                              (orb1,orb2,orb3,orb4,orb5,uz,vz,tz,wz,pz):

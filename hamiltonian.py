@@ -1446,12 +1446,25 @@ def create_edep_diag_matrix(VS,ANi,ACu,epNi,epCu,epbilayer):
         diag_el += util.get_orb_edep(orb4,z4,epCu,epNi,epbilayer)
         diag_el += util.get_orb_edep(orb5,z5,epCu,epNi,epbilayer) 
         
-        if pam.if_all_A_d8 == 0:
+        if pam.all_A_d8910 == 'd10':
             Ni_i,Cu_i = util.get_Number_NiCu(state)
             if Ni_i == 0:
                 diag_el +=ANi/2
             if Cu_i == 0:
-                diag_el +=ACu/2        
+                diag_el +=ACu/2  
+                
+        if pam.all_A_d8910 == 'd9':
+            Ni_i,Cu_i = util.get_Number_NiCu(state)
+            if Ni_i == 1:
+                diag_el +=3*ANi/2 
+            if Cu_i == 1:
+                diag_el +=3*ACu/2   
+            if Ni_i == 0:
+                diag_el +=2*ANi
+            if Cu_i == 0:
+                diag_el +=2*ACu       
+                                
+                
 
         data.append(diag_el); row.append(i); col.append(i)
 #         print (i, diag_el)
@@ -1618,8 +1631,8 @@ def get_double_occu_list(VS):
            d_Cu_list, idx_Cu, hole345_Cu_part, double_Cu_part, \
            p_list,apz_list
 
-def create_interaction_matrix_ALL_syms(VS,d_double,p_double,double_part,idx,hole345_part , \
-                                       S_val, Sz_val, AorB_sym,ACu, ANi, Upp):
+def create_interaction_matrix_ALL_syms(VS,d_double,p_double,apz_double,double_part,idx,hole345_part , \
+                                       S_val, Sz_val, AorB_sym,ACu, ANi, Upp, Uss):
     '''
     Create Coulomb-exchange interaction matrix of d-multiplets including all symmetries
     
@@ -1682,13 +1695,13 @@ def create_interaction_matrix_ALL_syms(VS,d_double,p_double,double_part,idx,hole
             o12 = sorted([o1,o2])
             o12 = tuple(o12)
 
-            if pam.if_all_A_d8 == 0:            
+            if pam.all_A_d8910 == 'd10':            
                 if z1==2:
                     state_order, interaction_mat, Stot, Sz_set, AorB = get_interaction_mat(ANi/2, sym)
                 elif z1==0:
                     state_order, interaction_mat, Stot, Sz_set, AorB = get_interaction_mat(ACu/2, sym)
                     
-            elif pam.if_all_A_d8 == 1:            
+            elif pam.all_A_d8910 == 'd8' or pam.all_A_d8910 == 'd9':            
                 if z1==2:
                     state_order, interaction_mat, Stot, Sz_set, AorB = get_interaction_mat(ANi, sym)
                 elif z1==0:
@@ -1787,6 +1800,10 @@ def create_interaction_matrix_ALL_syms(VS,d_double,p_double,double_part,idx,hole
     if Upp!=0:
         for i in p_double:
             data.append(Upp); row.append(i); col.append(i)
+    if Uss!=0:
+        for i in apz_double:
+            data.append(Uss); row.append(i); col.append(i)            
+            
 
     row = np.array(row)
     col = np.array(col)

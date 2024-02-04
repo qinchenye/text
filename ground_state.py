@@ -1030,6 +1030,10 @@ def get_ground_state(matrix, VS, S_Ni_val, Sz_Ni_val, S_Cu_val, Sz_Cu_val,bondin
 
     if os.path.isdir(path) == False:
         os.mkdir(path) 
+
+    txt=open('./data/value','a')                                  
+    txt.write(str(vals[0])+'\n')
+    txt.close()
         
     txt=open('./data/a1','a')                                  
     txt.write(str(wgt_a1[0]/number)+'\n')
