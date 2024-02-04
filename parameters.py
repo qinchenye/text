@@ -2,7 +2,7 @@ import math
 import numpy as np
 M_PI = math.pi
 
-Mc = 4
+Mc = 2
 
 # Note that Ni-d and O-p orbitals use hole language
 # while Nd orbs use electron language
@@ -30,12 +30,12 @@ edNi = edCu
 epNis = np.arange(1.86, 1.861, 1.0)
 
 # 29.5GPa:
-epNis = np.arange(3.23, 3.231, 1.0)
+epNis = np.arange(6.8, 6.81, 1.0)
 
 epCus = epNis
-
+epbilayers = epNis
 # 29.5GPa:
-epbilayers = np.arange(2.42, 2.421, 1.0)
+epbilayers = np.arange(6.0,6.01, 1.0)
 
 ANis = np.arange(6.0, 6.01, 1.0)
 ACus = ANis
@@ -57,20 +57,20 @@ C = 0.58
 Norb = 5
 if Norb==8 or Norb==5:
     #tpds = [0.00001]  # for check_CuO4_eigenvalues.py
-#     tpds = np.linspace(1.3, 1.3, num=1, endpoint=True) #[0.25]
+    tpds = np.linspace(1.8, 1.8, num=1, endpoint=True) #[0.25]
 #     tpds = [0.01]
 
     # 29.5GPa:
-    tpds = np.linspace(0.6, 0.6, num=1, endpoint=True) #[0.25]
+    tpds = np.linspace(0.3, 0.3, num=1, endpoint=True) #[0.25]
 
-#     tpps = [0.55]
+    tpps = [0.55]
 
     # 29.5GPa:
     tpps = [0.35]
     
-    tapzds = np.linspace(0, 4.2, num=14, endpoint=True)
-
-#     tz_a1a1 = 0.028
+    tapzds = np.linspace(0.3, 0.3, num=1, endpoint=True)
+    tapzps = np.linspace(0, 0, num=1, endpoint=True)
+    tz_a1a1 = 0.028
 
     # 29.5GPa:
     tz_a1a1 = 0.044
@@ -119,6 +119,8 @@ if_H0_rotate_byU = 1
 basis_change_type = 'd_double' # 'all_states' or 'd_double'
 if_print_VS_after_basis_change = 0
 
+if_all_A_d8 = 1  # if if_all_A_d8=0，then half A d8 and half A d10
+
 if_compute_Aw = 0
 if if_compute_Aw==1:
     if_find_lowpeak = 0
@@ -166,7 +168,6 @@ orbs = Ni_Cu_orbs + O_orbs + Obilayer_orbs
 #assert(len(orbs)==Norb)
 
 Upps = [0]
-Usss = [0]
 symmetries = ['1A1','3B1','3B1','1A2','3A2','1E','3E']
 print ("compute A(w) for symmetries = ",symmetries)
 
